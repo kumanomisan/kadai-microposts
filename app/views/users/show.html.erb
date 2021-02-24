@@ -13,6 +13,7 @@
       </div>
       <!-- カードボディ -->
       <div class="card-body">
+        <!--Helperにあるメソッドを利用しているが、Viewにある場合はMix-in(include)不要 -->
         <img class="rounded img-fluid" src="<%= gravatar_url(@user, { size: 500 }) %>" alt="">
       </div>
       
