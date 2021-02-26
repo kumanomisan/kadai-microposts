@@ -17,4 +17,7 @@ Rails.application.routes.draw do
   
   #必要なアクションだけを設定している
   resources :users, only: [:index, :show, :create]
+  
+  
+  resources :microposts, only: [:create, :destroy]
 end

@@ -18,4 +18,10 @@ class User < ApplicationRecord
   #利用する際には bcrypt のgemを有効かする必要がある
   # authenticate認証メソッド
   has_secure_password
+  
+  # UserモデルとMicropostモデルの関係性が
+  # 1 vs 多 ということを表現している
+  # has_many :多いmodel
+  # 自動で書かれないので手打ち必須
+  has_many :microposts
 end

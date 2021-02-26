@@ -1,6 +1,5 @@
 <div class="row">
-  
-  
+
   <!-- aside=補足みたいなイメージで使う -->
   <aside class="col-sm-4">
     
@@ -23,10 +22,13 @@
   
   <div class="col-sm-8">
     <ul class="nav nav-tabs nav-justified mb-3">
-      <li class="nav-item"><a href="#" class="nav-link">Tweets</a></li>
+      <!--この部分は 実行結果（文字列なら文字列を返す） if 条件という構文になる -->
+      <!--<%= #"active" if current_page?(user_path(@user)) %> -->
+      <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= "active" if current_page?(user_path(@user)) %>">Microposts <span class="badge badge-secondary"><%= @count_microposts %></span></a></li>
       <li class="nav-item"><a href="#" class="nav-link">Following</a></li>
       <li class="nav-item"><a href="#" class="nav-link">Follower</a></li>
     </ul>
+    <%= render "microposts/microposts", microposts: @microposts %>
   </div>
   
 </div>
