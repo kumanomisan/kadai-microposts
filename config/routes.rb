@@ -16,8 +16,21 @@ Rails.application.routes.draw do
   get "signup", to: "users#new"
   
   #必要なアクションだけを設定している
-  resources :users, only: [:index, :show, :create]
-  
+  # ブロックとして処理を追加した
+  # memberとcollectionの違いは、:idがつく・つかない
+  resources :users, only: [:index, :show, :create] do
+    member do
+      get :followings
+      get :followers
+    end
+    
+    # collection do
+      # get :search
+    # end
+  end 
   
   resources :microposts, only: [:create, :destroy]
+  
+  # フォローとリムーブだけルーティングを追加する
+  resources :relationships, only: [:create, :destroy]
 end

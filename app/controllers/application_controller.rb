@@ -16,8 +16,11 @@ class ApplicationController < ActionController::Base
 	end
 	
 	# Micropost の数のカウントを View で表示するためのメソッド
+	# フォロー関係の数も取得
 	def counts(user)
 		@count_microposts = user.microposts.count
+		@count_followings = user.followings.count
+		@count_followers = user.followers.count
 	end
 	
 end

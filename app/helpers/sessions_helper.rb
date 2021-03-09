@@ -2,7 +2,7 @@ module SessionsHelper
   
   #現在ログインしているユーザを取得するメソッド
   def current_user
-    #a ||= xxx　・・・ a が 偽 か 未定義 なら a に xxx を代入する
+    #a ||= xxx　・・・ a が false か nil なら a に xxx を代入する
     @current_user ||= User.find_by(id: session[:user_id])
   end
   

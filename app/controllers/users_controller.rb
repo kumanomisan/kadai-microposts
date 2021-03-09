@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_action :set_user, only: [:show]
+  before_action :set_user, only: [:show, :followings, :followers]
   #ログインしていないユーザにindexとshowのViewを見せないため
   before_action :require_user_logged_in, only: [:index, :show]
   
@@ -31,6 +31,16 @@ class UsersController < ApplicationController
     end
   end
   
+  
+  def followings
+    @followings = @user.followings.page(params[:page])
+    counts(@user)
+  end
+  
+  def followers
+    @followers = @user.followers.page(params[:page])
+    counts(@user)
+  end
   
   private
   
