@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_action :set_user, only: [:show, :followings, :followers, :favorite_posts]
+  before_action :set_user, only: [:show, :followings, :followers, :likes]
   #ログインしていないユーザにindexとshowのViewを見せないため
   before_action :require_user_logged_in, only: [:index, :show]
   
@@ -43,8 +43,8 @@ class UsersController < ApplicationController
     counts(@user)
   end
   
-  def favorite_posts
-    @favorites_post = @user.favorite_microposts.order(id: :desc).page(params[:page])
+  def likes
+    @likes = @user.favorite_microposts.order(id: :desc).page(params[:page])
     counts(@user)
   end
   
