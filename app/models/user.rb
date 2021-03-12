@@ -37,6 +37,10 @@ class User < ApplicationRecord
   has_many :reverses_of_relationship, class_name: "Relationship", foreign_key: "follow_id"
   has_many :followers, through: :reverses_of_relationship, source: :user
   
+  # お気に入り機能
+  has_many :favorites
+  has_many :favorite_microposts, through: :favorites, source: :micropost
+
   # ================ここにルーティン的なメソッドを書く==================
   # 常にフォロー/フォロワーの動作は、
   # 対象が自分自身でないことと、
@@ -69,6 +73,25 @@ class User < ApplicationRecord
   def feed_microposts
     Micropost.where(user_id: self.following_ids + [self.id])
   end 
+  
+  # お気に入り機能のメソッド
+  
+  # お気に入り追加
+  def register_favorite(favorite_post)
+    self.favorites.find_or_create_by(micropost_id: favorite_post.id)
+  end    
+  
+  # お気に入り削除
+  def release_favorite(favorite_post)
+    favorite_relationship = self.favorites.find_by(micropost_id: favorite_post.id)
+    favorite_relationship.destroy if favorite_relationship
+  end
+  
+  # お気に入り関係チェック
+  def in_favorite?(favorite_post)
+    self.favorite_microposts.include?(favorite_post)
+  end    
+
   
 end
 

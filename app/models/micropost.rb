@@ -18,4 +18,7 @@ class Micropost < ApplicationRecord
   # Tweet内容255文字までだよ
   validates :content, presence: true, length: { maximum:255 }
   
+  has_many :favorites
+  has_many :registered_users, through: :favorites, source: :user
+  
 end

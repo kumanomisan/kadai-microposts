@@ -22,6 +22,7 @@ Rails.application.routes.draw do
     member do
       get :followings
       get :followers
+      get :favorite_posts
     end
     
     # collection do
@@ -29,8 +30,9 @@ Rails.application.routes.draw do
     # end
   end 
   
-  resources :microposts, only: [:create, :destroy]
-  
+  resources :microposts, only: [:create, :destroy] 
   # フォローとリムーブだけルーティングを追加する
   resources :relationships, only: [:create, :destroy]
+  # お気に入り登録とお気に入り解除を追加
+  resources :favorites, only: [:create, :destroy]
 end

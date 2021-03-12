@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   
-  before_action :set_user, only: [:show, :followings, :followers]
+  before_action :set_user, only: [:show, :followings, :followers, :favorite_posts]
   #ログインしていないユーザにindexとshowのViewを見せないため
   before_action :require_user_logged_in, only: [:index, :show]
   
@@ -20,6 +20,7 @@ class UsersController < ApplicationController
   end
 
   def create
+    
     @user = User.new(user_params)
     
     if @user.save
@@ -29,8 +30,8 @@ class UsersController < ApplicationController
       flash.now[:danger] = "ユーザの登録に失敗しました"
       render :new
     end
+    
   end
-  
   
   def followings
     @followings = @user.followings.page(params[:page])
@@ -39,6 +40,11 @@ class UsersController < ApplicationController
   
   def followers
     @followers = @user.followers.page(params[:page])
+    counts(@user)
+  end
+  
+  def favorite_posts
+    @favorites_post = @user.favorite_microposts.order(id: :desc).page(params[:page])
     counts(@user)
   end
   

@@ -5,19 +5,6 @@ class SessionsController < ApplicationController
 
   def create
     
-    
-    p"test1-----------"
-    p params
-    p"test2-----------"
-    p params[:session]
-    p"test3-----------"
-    p params[:session][:password]
-    p"test4-----------"
-    d = params[:session]
-    p d[:password]
-    p"----------------"
-        
-    
     # paramsからハッシュデータを取り出し、
     # さらにその中からハッシュデータの値を取り出している
     email = params[:session][:email].downcase
