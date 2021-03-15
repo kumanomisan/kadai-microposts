@@ -1,8 +1,9 @@
 class UsersController < ApplicationController
   
-  before_action :set_user, only: [:show, :followings, :followers, :likes]
   #ログインしていないユーザにindexとshowのViewを見せないため
   before_action :require_user_logged_in, only: [:index, :show]
+  before_action :set_user, only: [:show, :followings, :followers, :likes]
+
   
   def index
     #ユーザー一覧をID降順に並び替え、ページネーション設定25にして表示

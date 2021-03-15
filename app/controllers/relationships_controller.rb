@@ -10,13 +10,13 @@ class RelationshipsController < ApplicationController
     current_user.follow(user)
     flash.now[:success] = "ユーザをフォローしました"
     # フォローしたユーザのページへ遷移
-    render :create
+    redirect_to user
   end
 
   def destroy
     user = User.find(params[:follow_id])
     current_user.unfollow(user)
     flash.now[:success] = "ユーザのフォローを解除しました"
-    render :destroy
+    redirect_to user
   end
 end
