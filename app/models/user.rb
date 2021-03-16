@@ -39,7 +39,10 @@ class User < ApplicationRecord
   
   # お気に入り機能
   has_many :favorites
-  has_many :favorite_microposts, through: :favorites, source: :micropost
+  has_many :favorite_microposts, through: :favorites, source: :micropost, dependent: :destroy 
+  
+  # お気に入りに追加されたまま削除されてもエラーにならないようにする
+  
 
   # ================ここにルーティン的なメソッドを書く==================
   # 常にフォロー/フォロワーの動作は、
