@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
   
   #ログインしていないユーザにindexとshowのViewを見せないため
-  before_action :require_user_logged_in, only: [:index, :show]
+  before_action :require_user_logged_in, only: [:index, :show, :followings, :followers, :likes]
   before_action :set_user, only: [:show, :followings, :followers, :likes]
 
   
